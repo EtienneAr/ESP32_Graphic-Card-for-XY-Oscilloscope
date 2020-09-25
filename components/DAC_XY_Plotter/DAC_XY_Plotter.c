@@ -8,8 +8,7 @@ static const char* TAG = "XYPlotter";
 #define I2S_PORT 0
 
 void _i2s_init(uint32_t rate) {
-	ESP_LOGI(TAG, "hello");
-	ESP_LOGI(TAG, "%d", I2S_PORT);
+	ESP_LOGI(TAG, "init I2S");
 	
 	i2s_config_t i2s_config = {
         .mode = I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN,
@@ -23,12 +22,12 @@ void _i2s_init(uint32_t rate) {
 	    .use_apll = false,
 	 };
 	 //install and start i2s driver
-	 i2s_driver_install(I2S_PORT, &i2s_config, 0, NULL);
+	 ESP_ERROR_CHECK(i2s_driver_install(I2S_PORT, &i2s_config, 0, NULL));
 	 
-     i2s_set_pin(I2S_PORT, NULL);
+     ESP_ERROR_CHECK(i2s_set_pin(I2S_PORT, NULL));
 
      //init DAC pad
-	 i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
+	 ESP_ERROR_CHECK(i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN));
 
 }
 
