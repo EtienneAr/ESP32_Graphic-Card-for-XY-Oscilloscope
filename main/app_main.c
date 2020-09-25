@@ -6,7 +6,7 @@
 #include "esp_log.h"
 #include "audio_example_file.h"
 
-#include "DAC_XY_Plotter.h"
+#include "include/DAC_XY_Plotter.h"
 
 void example_i2s_adc_dac(void*arg)
 {
