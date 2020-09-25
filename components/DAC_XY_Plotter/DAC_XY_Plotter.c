@@ -1,14 +1,16 @@
 #include "DAC_XY_Plotter.h"
 
-#if CONFIG_I2S_NUM_0
-  #define I2S_PORT 0
-#elif CONFIG_I2S_NUM_1
-  #define I2S_PORT 1
-#else
-  #error No I2S port specified
-#endif
+#include "esp_err.h"
+#include "esp_log.h"
+
+static const char* TAG = "XYPlotter";
+
+#define I2S_PORT 0
 
 void _i2s_init(uint32_t rate) {
+	ESP_LOGI(TAG, "hello");
+	ESP_LOGI(TAG, "%d", I2S_PORT);
+	
 	i2s_config_t i2s_config = {
         .mode = I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN,
         .sample_rate =  rate,
@@ -27,6 +29,7 @@ void _i2s_init(uint32_t rate) {
 
      //init DAC pad
 	 i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
+
 }
 
 
