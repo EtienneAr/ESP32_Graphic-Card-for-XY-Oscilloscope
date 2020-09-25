@@ -1,0 +1,14 @@
+menu "DAC_XY_Plotter"
+
+    choice I2S_PORT
+        prompt "I2S port"
+        default I2S_NUM_0
+        help
+            Which I2S port to use.
+        config I2S_NUM_0
+            bool "Port 0"
+        config I2S_NUM_1
+            bool "Port 1"
+    endchoice
+
+endmenu
