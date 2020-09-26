@@ -6,7 +6,11 @@
 #include "esp_log.h"
 #include "audio_example_file.h"
 
-#include "include/DAC_XY_Plotter.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/i2s.h"
+
+#include "DAC_XY_Plotter.h"
 
 void example_i2s_adc_dac(void*arg)
 {

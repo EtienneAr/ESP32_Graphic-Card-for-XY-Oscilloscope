@@ -1,2 +1,5 @@
 COMPONENT_ADD_INCLUDEDIRS := ./include
-COMPONENT_SRCS := ./src ./src_include
+
+COMPONENT_PRIV_INCLUDEDIRS +=  ./priv_include
+
+COMPONENT_SRCDIRS += ./src

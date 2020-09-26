@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := i2s-adc-dac
+PROJECT_NAME := DAC_XY_Plotter
 
 include $(IDF_PATH)/make/project.mk
 
