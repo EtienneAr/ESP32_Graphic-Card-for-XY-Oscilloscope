@@ -1,7 +1,5 @@
 #include "I2SManager.h"
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "driver/i2s.h"
 
 #include "esp_err.h"
@@ -9,12 +7,7 @@
 
 static const char* TAG = "I2S-Manager";
 
-
 #define I2S_PORT ((i2s_port_t) 0)
-
-void test_isr_handle(void* arg) {
-	ESP_LOGI(TAG, "ISR !");
-}
 
 void I2SManager_init(int rate) {
 	ESP_LOGI(TAG, "init I2S");
@@ -38,4 +31,8 @@ void I2SManager_init(int rate) {
      //init DAC pad
 	 ESP_ERROR_CHECK(i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN));
 
+}
+
+void I2SManager_write(const void *src, size_t size, size_t *bytes_written, TickType_t ticks_to_wait) {
+	ESP_ERROR_CHECK(i2s_write(I2S_PORT, src, size, bytes_written, ticks_to_wait));
 }
