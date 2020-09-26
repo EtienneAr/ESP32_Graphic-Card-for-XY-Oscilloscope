@@ -5,24 +5,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef struct graphicItem {
+typedef struct GraphicItem {
 	int id;
 	bool isVisible;
 	uint8_t* points;
 	size_t sizeof_points;
-} graphicItem_t;
+} GraphicItem_t;
 
 
-void graphicItem_delete(graphicItem_t *p_item) {
-	if(p_item == NULL) {
-		return;
-	}
-	
-	if(p_item->points != NULL) {
-		free(p_item->points);
-	}
+void graphicItem_delete(GraphicItem_t *p_item);
 
-	free(p_item);	
-}
 
 #endif

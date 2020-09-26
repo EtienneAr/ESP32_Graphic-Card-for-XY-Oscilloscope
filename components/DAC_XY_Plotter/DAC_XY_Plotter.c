@@ -2,6 +2,8 @@
 #include "DAC_XY_Plotter_priv.h"
 
 #include "I2SManager.h"
+#include "CircularLinkedList.h"
+#include "GraphicItem.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -16,11 +18,14 @@ void XYPlotter_init(int rate) {
 	xTaskCreatePinnedToCore(XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 0);
 }
 
-#include "audio_example_file.h"
 void XYPlotter_feeder() {
-	size_t bytes_written;
 	while(1) {
-		I2SManager_write_8bitLR(audio_table, sizeof(audio_table), &bytes_written, portMAX_DELAY);
+		GraphicItem_t *p_item = cll_next_item();
+		if(p_item != NULL) {
+			I2SManager_write_8bitLR(p_item->points, p_item->sizeof_points, NULL, portMAX_DELAY);
+		} else {
+			I2SManager_write_blank();
+		}
 		vTaskDelay(100 / portTICK_PERIOD_MS);
     }
     vTaskDelete(NULL);
