@@ -1,6 +1,7 @@
 #include "CircularLinkedList.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Cll_el {
 	GraphicItem_t* p_item ;
@@ -77,7 +78,9 @@ GraphicItem_t* cll_get_item_byId(int id) {
 }
 
 void cll_add_item(GraphicItem_t* p_item) {
+	printf("Try calloc :\n");
 	Cll_el_t *new_element = calloc(1, sizeof(struct Cll_el));
+	printf("New element addr %p\n", new_element);
 	new_element->p_item = p_item;
 	new_element->next = p_first_el;
 	if(p_first_el != NULL) {
