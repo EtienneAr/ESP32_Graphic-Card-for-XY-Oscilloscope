@@ -80,7 +80,10 @@ void cll_add_item(GraphicItem_t* p_item) {
 	Cll_el_t *new_element = calloc(1, sizeof(struct Cll_el));
 	new_element->p_item = p_item;
 	new_element->next = p_first_el;
-	p_first_el->prev = new_element;
+	if(p_first_el != NULL) {
+		p_first_el->prev = new_element;
+	}
+	p_first_el = new_element;
 }
 
 void _cll_delete_el(Cll_el_t *p_el) {
