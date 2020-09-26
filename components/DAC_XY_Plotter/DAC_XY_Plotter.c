@@ -20,8 +20,11 @@ static int id_incr = 0;
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 
-	Pen_t myPen = { .spacing = 1, .intensity = 10 };
+	Pen_t myPen = { .spacing = 1, .intensity = 1 };
 	XYPlotter_drawLine(0,0, 255,255, myPen);
+
+	Pen_t myPen2 = { .spacing = 50, .intensity = 50 };
+	XYPlotter_drawLine(0,255, 255,0, myPen2);
 
 	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 0);
 }
@@ -33,9 +36,8 @@ void _XYPlotter_feeder() {
 		if(p_item != NULL) {
 			I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
 		} else {
-			I2SManager_write_blank();
+			vTaskDelay(1);
 		}
-		vTaskDelay(100 / portTICK_PERIOD_MS);
     }
     vTaskDelete(NULL);
 }
