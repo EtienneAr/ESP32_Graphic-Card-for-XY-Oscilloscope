@@ -12,8 +12,6 @@ static const char* TAG = "I2S-Manager";
 #define I2S_BUF_LEN 1024
 #define I2S_BUF_COUNT 4
 
-#define CONVERSION_CHUNK_SIZE 1024
-
 #define min(x,y) ((x)<(y) ? (x) : (y))
 
 void I2SManager_init(int rate) {
@@ -45,26 +43,9 @@ void I2SManager_write_16bitLR(const void *src, size_t size, size_t *bytes_writte
 }
 
 void I2SManager_write_8bitLR(const void *src, size_t size, size_t *bytes_written, TickType_t ticks_to_wait) {
-    uint8_t *buff_16bitLR = malloc(2*CONVERSION_CHUNK_SIZE);
-    *bytes_written = 0;
+    ESP_ERROR_CHECK(i2s_write_expand(I2S_PORT, src, size, 8, 16, bytes_written, ticks_to_wait));
+}
 
-    if(buff_16bitLR == NULL) {
-    	ESP_LOGE(TAG, "impossible to alloc conversion chunk !");
-    	return;
-    }
-
-    for(int offset=0;offset<size;offset+=CONVERSION_CHUNK_SIZE) {
-    	int chunk_size = min(size, CONVERSION_CHUNK_SIZE);
-	    for (int i = 0; i < chunk_size; i++) {
-	        buff_16bitLR[2*i] = 0;
-	        buff_16bitLR[2*i+1] = ((uint8_t *) src)[offset + i];
-	    }
-	   	size_t chunkwritten;
-	    I2SManager_write_16bitLR(buff_16bitLR, chunk_size*2, &chunkwritten, ticks_to_wait);
-	    bytes_written += chunkwritten;
-    }
-
-    free(buff_16bitLR);
-    //Converts to 8bits
-    *bytes_written /= 2;
+void I2SManager_write_blank() {
+	//TODO: Do something here !
 }

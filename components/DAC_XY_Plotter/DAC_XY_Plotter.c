@@ -10,16 +10,13 @@ static const char* TAG = "XYPlotter";
 #include "esp_err.h"
 #include "esp_log.h"
 
-
-#include "audio_example_file.h"
-
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 
 	xTaskCreatePinnedToCore(XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 0);
 }
 
-
+#include "audio_example_file.h"
 void XYPlotter_feeder() {
 	size_t bytes_written;
 	while(1) {
