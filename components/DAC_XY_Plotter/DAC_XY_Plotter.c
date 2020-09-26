@@ -20,12 +20,6 @@ static int id_incr = 0;
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 
-	Pen_t myPen = { .spacing = 1, .intensity = 1 };
-	XYPlotter_drawLine(0,0, 255,255, myPen);
-
-	Pen_t myPen2 = { .spacing = 50, .intensity = 50 };
-	XYPlotter_drawLine(0,255, 255,0, myPen2);
-
 	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 0);
 }
 
