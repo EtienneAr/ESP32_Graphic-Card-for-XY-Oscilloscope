@@ -1,5 +1,6 @@
 #include "I2SManager.h"
 
+#include <string.h>
 #include "driver/i2s.h"
 
 #include "esp_err.h"
@@ -33,6 +34,16 @@ void I2SManager_init(int rate) {
 
 }
 
-void I2SManager_write(const void *src, size_t size, size_t *bytes_written, TickType_t ticks_to_wait) {
+void I2SManager_write_16bitLR(const void *src, size_t size, size_t *bytes_written, TickType_t ticks_to_wait) {
 	ESP_ERROR_CHECK(i2s_write(I2S_PORT, src, size, bytes_written, ticks_to_wait));
+}
+
+void I2SManager_write_8bitLR(const void *src, size_t size, size_t *bytes_written, TickType_t ticks_to_wait) {
+    uint8_t buff_16bitLR[size*2];
+    for (int i = 0; i < size; i++) {
+        buff_16bitLR[2*i] = 0;
+        buff_16bitLR[2*i+1] = ((uint8_t *) src)[i];
+    }
+    I2SManager_write_16bitLR(buff_16bitLR, size*2, bytes_written, ticks_to_wait);
+    *bytes_written /= 2;
 }

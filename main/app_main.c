@@ -10,5 +10,3 @@ esp_err_t app_main()
     esp_log_level_set("I2S", ESP_LOG_INFO);
     return ESP_OK;
 }
-
-
