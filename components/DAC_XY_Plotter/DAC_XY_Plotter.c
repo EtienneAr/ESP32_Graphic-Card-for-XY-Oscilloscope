@@ -31,7 +31,7 @@ void _XYPlotter_feeder() {
 	while(1) {
 		GraphicItem_t *p_item = cll_next_item();
 		if(p_item != NULL) {
-			I2SManager_write_8bitLR(p_item->points, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
+			I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
 		} else {
 			I2SManager_write_blank();
 		}
@@ -50,12 +50,11 @@ GraphicItem_t *_XYPlotter_create_new_item() {
 void XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 	GraphicItem_t *p_item = _XYPlotter_create_new_item();
 
-	p_item->sizeof_points = pen.intensity * 2 * sizeof(uint8_t);
-	p_item->points = malloc(p_item->sizeof_points);
+	p_item->sizeof_points = pen.intensity * sizeof(Coord_t);
+	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	for(int i=0;i<p_item->sizeof_points;i+=2) {
-		p_item->points[i] = x;
-		p_item->points[i+1] = y;
+	for(int i=0;i<pen.intensity;i++) {
+		p_item->points.coord[i] = (Coord_t) {.x = x, .y = y};
 	}
 
 	cll_add_item(p_item);
@@ -68,16 +67,15 @@ void XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 	const int macroPointsNb = (length/pen.spacing);
 	const int subPointsNb = macroPointsNb * pen.intensity;
 	
-	p_item->sizeof_points = subPointsNb * 2 * sizeof(uint8_t);
-	p_item->points = malloc(p_item->sizeof_points);
+	p_item->sizeof_points = subPointsNb * sizeof(Coord_t);
+	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	int x, y;
+	Coord_t runningPoint;
 	for(int n=0;n<macroPointsNb;n++) {
-		x = x1 + n * (x2 - x1) / max(macroPointsNb-1, 1);
-		y = y1 + n * (y2 - y1) / max(macroPointsNb-1, 1);
+		runningPoint.x = x1 + n * (x2 - x1) / max(macroPointsNb-1, 1);
+		runningPoint.y = y1 + n * (y2 - y1) / max(macroPointsNb-1, 1);
 		for(int i=0;i<pen.intensity;i++) {
-			p_item->points[2 * n * pen.intensity + 2*i    ] = x;
-			p_item->points[2 * n * pen.intensity + 2*i + 1] = y;	
+			p_item->points.coord[n * pen.intensity + i ] = runningPoint;
 		}
 	}
 

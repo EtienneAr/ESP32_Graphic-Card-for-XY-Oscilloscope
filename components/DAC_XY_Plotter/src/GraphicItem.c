@@ -5,8 +5,8 @@ void graphicItem_delete(GraphicItem_t *p_item) {
 		return;
 	}
 	
-	if(p_item->points != NULL) {
-		free(p_item->points);
+	if(p_item->points.bytes != NULL) {
+		free(p_item->points.bytes);
 	}
 
 	free(p_item);	
