@@ -7,12 +7,14 @@
 
 #include "CircularLinkedList.h"
 
+
 typedef struct Coord {
 	uint8_t x;
 	uint8_t y;
 } Coord_t;
 
 typedef struct GraphicItem {
+	bool isAvailable;
 	bool isVisible;
 	union {
 		Coord_t *coord;
@@ -24,5 +26,8 @@ typedef struct GraphicItem {
 GraphicItem_t* GI_create();
 void GI_delete(GraphicItem_t* p_item);
 
+void GI_initMutex();
+bool GI_take(GraphicItem_t *p_item);
+void GI_give(GraphicItem_t *p_item);
 
 #endif
