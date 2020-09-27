@@ -12,17 +12,17 @@ typedef struct Coord {
 } Coord_t;
 
 typedef struct GraphicItem {
-	bool isAvailable;
+	volatile bool isAvailable;
 	
-	bool isVisible;
+	volatile bool isVisible;
 	union {
 		Coord_t *coord;
 		uint8_t *bytes;
 	} points;
 	size_t sizeof_points;
 
-	struct GraphicItem *p_next;
-	struct GraphicItem *p_prev;
+	volatile struct GraphicItem *p_next;
+	volatile struct GraphicItem *p_prev;
 } GraphicItem_t;
 
 GraphicItem_t* GI_create_take();

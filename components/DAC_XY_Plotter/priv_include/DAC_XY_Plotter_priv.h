@@ -5,6 +5,4 @@
 
 void _XYPlotter_feeder();
 
-GraphicItem_t *_XYPlotter_create_new_item();
-
 #endif
