@@ -1,6 +1,7 @@
 #include "GraphicItem.h"
 
 #include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "freertos/semphr.h"
 
 SemaphoreHandle_t mutex;
@@ -80,7 +81,13 @@ void GI_initMutex() {
 	mutex = xSemaphoreCreateMutex();
 }
 
-bool GI_take(GraphicItem_t *p_item) {
+void GI_wait_take(GraphicItem_t *p_item) {
+	while(!GI_try_take(p_item)) {
+		vTaskDelay(1);
+	}
+}
+
+bool GI_try_take(GraphicItem_t *p_item) {
 	xSemaphoreTake(mutex, portMAX_DELAY);
 	bool ret = p_item->isAvailable;
 	p_item->isAvailable = false;

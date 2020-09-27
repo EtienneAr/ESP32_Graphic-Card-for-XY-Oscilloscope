@@ -31,7 +31,8 @@ void GI_delete(GraphicItem_t* p_item);
 GraphicItem_t* GI_get_next();
 
 void GI_initMutex();
-bool GI_take(GraphicItem_t *p_item);
+bool GI_try_take(GraphicItem_t *p_item);
+void GI_wait_take(GraphicItem_t *p_item);
 void GI_give(GraphicItem_t *p_item);
 
 #endif

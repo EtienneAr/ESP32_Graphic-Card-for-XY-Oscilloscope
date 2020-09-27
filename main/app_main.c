@@ -27,14 +27,14 @@ esp_err_t app_main()
 
 	while(1) {
 		XYPlotter_delete(objects[0]);
-		XYPlotter_delete(objects[1]);
-		XYPlotter_delete(objects[2]);
-		XYPlotter_delete(objects[3]);
-		XYPlotter_delete(objects[4]);
 		objects[0] = DRAWLINE(size, 0, 72);
+		XYPlotter_delete(objects[1]);
 		objects[1] = DRAWLINE(size, 72, 144);
+		XYPlotter_delete(objects[2]);
 		objects[2] = DRAWLINE(size, 144, 216);
+		XYPlotter_delete(objects[3]);
 		objects[3] = DRAWLINE(size, 216, 288);
+		XYPlotter_delete(objects[4]);
 		objects[4] = DRAWLINE(size, 288, 0);
 		size = (size + 1)%127;
 		vTaskDelay(1);
