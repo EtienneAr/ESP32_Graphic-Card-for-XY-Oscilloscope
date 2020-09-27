@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 typedef struct Cll_el {
-	GraphicItem_t* p_item ;
+	void* p_item ;
 	struct Cll_el* prev;
 	struct Cll_el *next;
 } Cll_el_t;
@@ -12,17 +12,16 @@ typedef struct Cll_el {
 static Cll_el_t *p_first_el = NULL;
 static Cll_el_t *p_current_el = NULL;
 
-static Cll_el_t* _cll_get_el_byId(int id);
 static void      _cll_delete_el(Cll_el_t *p_el);
 
-GraphicItem_t* cll_current_item() {
+void* cll_current_item() {
 	if(p_current_el == NULL) {
 		return NULL;
 	}
 	return p_current_el->p_item;
 }
 
-GraphicItem_t* cll_next_item() {
+void* cll_next_item() {
 	//If no current element or it has no neighbour
 	if(p_current_el == NULL || p_current_el->next == NULL) {
 		//got to the first one
@@ -40,7 +39,7 @@ GraphicItem_t* cll_next_item() {
 	return p_current_el->p_item;
 }
 
-GraphicItem_t* cll_prev_item() {
+void* cll_prev_item() {
 	//If no current element or it has no neighbour
 	if(p_current_el == NULL || p_current_el->prev == NULL) {
 		//got to the first one
@@ -58,26 +57,7 @@ GraphicItem_t* cll_prev_item() {
 	return p_current_el->p_item;
 }
 
-Cll_el_t* _cll_get_el_byId(int id) {
-	Cll_el_t *p_iterator = p_first_el;
-	while(p_iterator != NULL) {
-		if(p_iterator->p_item != NULL && p_iterator->p_item->id == id) {
-			break;
-		}
-	}
-	return p_iterator;
-}
-
-GraphicItem_t* cll_get_item_byId(int id) {
-	Cll_el_t *p_el = _cll_get_el_byId(id);
-	if(p_el != NULL) {
-		return p_el->p_item;
-	}
-
-	return NULL;
-}
-
-void cll_add_item(GraphicItem_t* p_item) {
+void cll_add(void* p_item) {
 	Cll_el_t *new_element = calloc(1, sizeof(struct Cll_el));
 	new_element->p_item = p_item;
 	new_element->next = p_first_el;
@@ -102,30 +82,22 @@ void _cll_delete_el(Cll_el_t *p_el) {
 		}
 	}
 
-	//delete the element
-	if(p_el->p_item != NULL) {
-		graphicItem_delete(p_el->p_item);
-	}
-
 	free(p_el);
 }
 
-void cll_delete_item(GraphicItem_t* p_item) {
-	Cll_el_t *p_found = NULL;
-
+bool cll_remove(void* p_item) {
 	Cll_el_t *p_iterator = p_first_el;
 	while(p_iterator != NULL) {
 		if(p_iterator->p_item == p_item) {
-			p_found = p_iterator;
 			break;
 		}
 	}
 
-	_cll_delete_el(p_found);
-}
+	if(p_iterator == NULL) {
+		//item not found
+		return false;
+	}
 
-
-void cll_delete_item_byId(int id) {
-	Cll_el_t *p_el = _cll_get_el_byId(id);
-	_cll_delete_el(p_el);
+	_cll_delete_el(p_iterator);
+	return true;
 }

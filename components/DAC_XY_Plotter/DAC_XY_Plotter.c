@@ -2,7 +2,7 @@
 #include "DAC_XY_Plotter_priv.h"
 
 #include "I2SManager.h"
-#include "CircularLinkedList.h"
+
 #include "GraphicItem.h"
 
 #include <math.h>
@@ -36,15 +36,8 @@ void _XYPlotter_feeder() {
     vTaskDelete(NULL);
 }
 
-GraphicItem_t *_XYPlotter_create_new_item() {
-	GraphicItem_t *p_item = malloc(sizeof(GraphicItem_t));
-	p_item->id = id_incr++;
-	p_item->isVisible = true;
-	return p_item;
-}
-
 void XYPlotter_drawPoint(int x, int y, Pen_t pen) {
-	GraphicItem_t *p_item = _XYPlotter_create_new_item();
+	GraphicItem_t *p_item = GI_create();
 
 	p_item->sizeof_points = pen.intensity * sizeof(Coord_t);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
@@ -52,12 +45,10 @@ void XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 	for(int i=0;i<pen.intensity;i++) {
 		p_item->points.coord[i] = (Coord_t) {.x = x, .y = y};
 	}
-
-	cll_add_item(p_item);
 }
 
 void XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
-	GraphicItem_t *p_item = _XYPlotter_create_new_item();
+	GraphicItem_t *p_item = GI_create();
 
 	const float length = sqrt(pow(x1-x2, 2) + pow(y1-y2, 2));
 	const int macroPointsNb = (length/pen.spacing);
@@ -74,6 +65,4 @@ void XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 			p_item->points.coord[n * pen.intensity + i ] = runningPoint;
 		}
 	}
-
-	cll_add_item(p_item);
 }

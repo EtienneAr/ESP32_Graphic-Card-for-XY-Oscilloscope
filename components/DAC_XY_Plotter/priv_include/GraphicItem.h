@@ -5,13 +5,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "CircularLinkedList.h"
+
 typedef struct Coord {
 	uint8_t x;
 	uint8_t y;
 } Coord_t;
 
 typedef struct GraphicItem {
-	int id;
 	bool isVisible;
 	union {
 		Coord_t *coord;
@@ -20,8 +21,11 @@ typedef struct GraphicItem {
 	size_t sizeof_points;
 } GraphicItem_t;
 
+typedef GraphicItem_t* GI_uid_t;
 
-void graphicItem_delete(GraphicItem_t *p_item);
+
+GI_uid_t GI_create();
+void GI_delete(GI_uid_t uid);
 
 
 #endif
