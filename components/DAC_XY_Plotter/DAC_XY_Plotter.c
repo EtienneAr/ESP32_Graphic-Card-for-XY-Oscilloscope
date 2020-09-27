@@ -21,30 +21,28 @@ void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 	GI_initMutex();
 
-	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 1);
+	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XY-feeder", 2048, NULL, 10, NULL, 1);
 }
 
 void _XYPlotter_feeder() {
 	size_t bytesWritten;
 	while(1) {
-		GraphicItem_t *p_item = cll_next_item();
+		GraphicItem_t *p_item = GI_get_next();
 		if(p_item != NULL) {
 			if(GI_take(p_item)) {
 				if(p_item->isVisible && p_item->sizeof_points > 0) {
 					I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
 				}
-			} else {
-				vTaskDelay(1);
+				GI_give(p_item);
 			}
-			GI_give(p_item);
 		}
+		vTaskDelay(1);
     }
     vTaskDelete(NULL);
 }
 
 GraphicItem_t *_XYPlotter_create_new_item() {
-	GraphicItem_t *p_item = GI_create();
-	cll_add(p_item);
+	GraphicItem_t *p_item = GI_create_take();
 	return p_item;
 }
 
@@ -54,7 +52,6 @@ void XYPlotter_delete(GI_uid_t uid) {
 		vTaskDelay(1);
 	}
 
-	cll_remove(p_item);
 	GI_delete(p_item);
 }
 

@@ -9,7 +9,7 @@
 static const char* TAG = "Main_app";
 
 #include <math.h>
-#define DRAWLINE(dist, angle_a, angle_b) XYPlotter_drawLine(dist*cos(angle_a*3.141592/180),dist*sin(angle_a*3.141592/180),dist*cos(angle_b*3.141592/180),dist*sin(angle_b*3.141592/180), pen)
+#define DRAWLINE(dist, angle_a, angle_b) XYPlotter_drawLine(127+dist*cos(angle_a*3.141592/180),127+dist*sin(angle_a*3.141592/180),127+dist*cos(angle_b*3.141592/180),127+dist*sin(angle_b*3.141592/180), pen)
 
 esp_err_t app_main()
 {
