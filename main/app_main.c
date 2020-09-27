@@ -13,37 +13,72 @@ static const char* TAG = "Main_app";
 
 esp_err_t app_main()
 {
-    XYPlotter_init(44100);
+    XYPlotter_init(1000000);
     esp_log_level_set("I2S", ESP_LOG_INFO);
 
-    Pen_t pen = {.spacing = 1, .intensity = 2};
+    Pen_t pen = {.spacing = 1, .intensity = 1};
 
-	GI_uid_t objects[5];
-
-	for(int i = 0;i<5;i++) {
-		objects[i] = XYPlotter_drawLine(0,0,0,255, pen);
-	}
-
-	int size = 0;
-	int cnt = 0;
-	while(1) {
-		
-		XYPlotter_delete(objects[0]);
-		objects[0] = DRAWLINE(size, 0, 72);
-		XYPlotter_delete(objects[1]);
-		objects[1] = DRAWLINE(size, 72, 144);
-		XYPlotter_delete(objects[2]);
-		objects[2] = DRAWLINE(size, 144, 216);
-		XYPlotter_delete(objects[3]);
-		objects[3] = DRAWLINE(size, 216, 288);
-		XYPlotter_delete(objects[4]);
-		objects[4] = DRAWLINE(size, 288, 0);
-
-		size = cnt + 27;
-		cnt = (cnt+1) % 100;
-		vTaskDelay(10);
-		ESP_LOGW(TAG, "Free heap memory : %d", xPortGetFreeHeapSize());
-	}
+	XYPlotter_drawLine(255-17, 13, 255-80, 18, pen);
+	XYPlotter_drawLine(255-80, 18, 255-79, 59, pen);
+	XYPlotter_drawLine(255-79, 59, 255-53, 58, pen);
+	XYPlotter_drawLine(255-53, 58, 255-44, 16, pen);
+	XYPlotter_drawLine(255-44, 16, 255-40, 62, pen);
+	XYPlotter_drawLine(255-40, 62, 255-11, 59, pen);
+	XYPlotter_drawLine(255-11, 59, 255-16, 15, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-79, 73, 255-49, 72, pen);
+	XYPlotter_drawLine(255-49, 72, 255-49, 96, pen);
+	XYPlotter_drawLine(255-49, 96, 255-76, 95, pen);
+	XYPlotter_drawLine(255-76, 95, 255-78, 73, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-76, 103, 255-48, 103, pen);
+	XYPlotter_drawLine(255-48, 103, 255-71, 112, pen);
+	XYPlotter_drawLine(255-71, 112, 255-48, 115, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-48, 121, 255-49, 148, pen);
+	XYPlotter_drawLine(255-49, 148, 255-49, 133, pen);
+	XYPlotter_drawLine(255-49, 133, 255-75, 135, pen);
+	XYPlotter_drawLine(255-75, 135, 255-73, 121, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-49, 154, 255-77, 151, pen);
+	XYPlotter_drawLine(255-77, 151, 255-75, 168, pen);
+	XYPlotter_drawLine(255-75, 168, 255-50, 172, pen);
+	XYPlotter_drawLine(255-50, 172, 255-49, 154, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-49, 175, 255-73, 176, pen);
+	XYPlotter_drawLine(255-73, 176, 255-74, 191, pen);
+	XYPlotter_drawLine(255-74, 191, 255-48, 191, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-49, 199, 255-75, 200, pen);
+	XYPlotter_drawLine(255-75, 200, 255-50, 199, pen);
+	XYPlotter_drawLine(255-50, 199, 255-50, 219, pen);
+	XYPlotter_drawLine(255-50, 219, 255-62, 218, pen);
+	XYPlotter_drawLine(255-62, 218, 255-61, 199, pen);
+	XYPlotter_drawLine(255-61, 199, 255-75, 219, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-150, 11, 255-99, 30, pen);
+	XYPlotter_drawLine(255-99, 30, 255-132, 40, pen);
+	XYPlotter_drawLine(255-132, 40, 255-108, 81, pen);
+	XYPlotter_drawLine(255-108, 81, 255-166, 65, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-170, 77, 255-111, 100, pen);
+	XYPlotter_drawLine(255-111, 100, 255-123, 135, pen);
+	XYPlotter_drawLine(255-123, 135, 255-177, 106, pen);
+	XYPlotter_drawLine(255-177, 106, 255-170, 77, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-179, 120, 255-126, 143, pen);
+	XYPlotter_drawLine(255-126, 143, 255-186, 139, pen);
+	XYPlotter_drawLine(255-186, 139, 255-137, 175, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-194, 155, 255-141, 191, pen);
+	XYPlotter_drawLine(255-141, 191, 255-169, 209, pen);
+	XYPlotter_drawLine(255-169, 209, 255-197, 184, pen);
+	XYPlotter_drawLine(255-197, 184, 255-194, 155, pen);
+	vTaskDelay(100);
+	XYPlotter_drawLine(255-229, 230, 255-209, 191, pen);
+	XYPlotter_drawLine(255-209, 191, 255-156, 229, pen);
+	XYPlotter_drawLine(255-156, 229, 255-172, 254, pen);
+	XYPlotter_drawLine(255-181, 212, 255-196, 242, pen);
 
     return ESP_OK;
 }

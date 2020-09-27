@@ -9,7 +9,7 @@
 static const char* TAG = "I2S-Manager";
 
 #define I2S_PORT ((i2s_port_t) 0)
-#define I2S_BUF_LEN 256
+#define I2S_BUF_LEN 1024
 #define I2S_BUF_COUNT 4
 
 #define min(x,y) ((x)<(y) ? (x) : (y))
