@@ -91,6 +91,7 @@ bool cll_remove(void* p_item) {
 		if(p_iterator->p_item == p_item) {
 			break;
 		}
+		p_iterator = p_iterator->next;
 	}
 
 	if(p_iterator == NULL) {

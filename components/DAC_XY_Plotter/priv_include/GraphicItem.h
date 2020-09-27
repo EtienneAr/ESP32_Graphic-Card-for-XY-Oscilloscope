@@ -21,11 +21,8 @@ typedef struct GraphicItem {
 	size_t sizeof_points;
 } GraphicItem_t;
 
-typedef GraphicItem_t* GI_uid_t;
-
-
-GI_uid_t GI_create();
-void GI_delete(GI_uid_t uid);
+GraphicItem_t* GI_create();
+void GI_delete(GraphicItem_t* p_item);
 
 
 #endif

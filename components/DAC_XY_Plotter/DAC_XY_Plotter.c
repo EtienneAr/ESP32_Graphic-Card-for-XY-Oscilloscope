@@ -36,8 +36,24 @@ void _XYPlotter_feeder() {
     vTaskDelete(NULL);
 }
 
-void XYPlotter_drawPoint(int x, int y, Pen_t pen) {
+GraphicItem_t *_XYPlotter_create_new_item() {
 	GraphicItem_t *p_item = GI_create();
+	cll_add(p_item);
+	return p_item;
+}
+
+void XYPlotter_delete(GI_uid_t uid) {
+	GraphicItem_t *p_item = (GraphicItem_t*) uid;
+	bool res = cll_remove(p_item);
+	if(!res) {
+		//There was no object
+		return;
+	}
+	GI_delete(p_item);
+}
+
+GI_uid_t XYPlotter_drawPoint(int x, int y, Pen_t pen) {
+	GraphicItem_t *p_item = _XYPlotter_create_new_item();
 
 	p_item->sizeof_points = pen.intensity * sizeof(Coord_t);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
@@ -45,10 +61,12 @@ void XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 	for(int i=0;i<pen.intensity;i++) {
 		p_item->points.coord[i] = (Coord_t) {.x = x, .y = y};
 	}
+
+	return (GI_uid_t) p_item;
 }
 
-void XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
-	GraphicItem_t *p_item = GI_create();
+GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
+	GraphicItem_t *p_item = _XYPlotter_create_new_item();
 
 	const float length = sqrt(pow(x1-x2, 2) + pow(y1-y2, 2));
 	const int macroPointsNb = (length/pen.spacing);
@@ -65,4 +83,6 @@ void XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 			p_item->points.coord[n * pen.intensity + i ] = runningPoint;
 		}
 	}
+
+	return (GI_uid_t) p_item;
 }
