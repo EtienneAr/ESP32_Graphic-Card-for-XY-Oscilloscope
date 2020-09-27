@@ -20,7 +20,7 @@ static int id_incr = 0;
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 
-	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 0);
+	xTaskCreatePinnedToCore(_XYPlotter_feeder, "XYPlotter-feeder", 2048, NULL, 10, NULL, 1);
 }
 
 void _XYPlotter_feeder() {
@@ -28,7 +28,9 @@ void _XYPlotter_feeder() {
 	while(1) {
 		GraphicItem_t *p_item = cll_next_item();
 		if(p_item != NULL) {
-			I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
+			if(p_item->isVisible && p_item->sizeof_points > 0) {
+				I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
+			}
 		} else {
 			vTaskDelay(1);
 		}
@@ -62,6 +64,7 @@ GI_uid_t XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 		p_item->points.coord[i] = (Coord_t) {.x = x, .y = y};
 	}
 
+	p_item->isVisible = true;
 	return (GI_uid_t) p_item;
 }
 
@@ -84,5 +87,6 @@ GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 		}
 	}
 
+	p_item->isVisible = true;
 	return (GI_uid_t) p_item;
 }

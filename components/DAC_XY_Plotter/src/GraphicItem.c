@@ -12,7 +12,7 @@ void GI_delete(GraphicItem_t* p_item) {
 
 GraphicItem_t* GI_create() {
 	GraphicItem_t *p_item = malloc(sizeof(GraphicItem_t));
-	p_item->isVisible = true;
+	p_item->isVisible = false;
 
 	return p_item;
 }

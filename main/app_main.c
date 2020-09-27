@@ -26,6 +26,11 @@ esp_err_t app_main()
 	}
 
 	while(1) {
+		XYPlotter_delete(objects[0]);
+		XYPlotter_delete(objects[1]);
+		XYPlotter_delete(objects[2]);
+		XYPlotter_delete(objects[3]);
+		XYPlotter_delete(objects[4]);
 		objects[0] = DRAWLINE(size, 0, 72);
 		objects[1] = DRAWLINE(size, 72, 144);
 		objects[2] = DRAWLINE(size, 144, 216);
