@@ -28,11 +28,11 @@ typedef struct GraphicItem {
 GraphicItem_t* GI_create_take();
 void GI_delete(GraphicItem_t* p_item);
 
-GraphicItem_t* GI_get_next();
+GraphicItem_t* GI_get_next_take();
 
 void GI_initMutex();
 bool GI_try_take(GraphicItem_t *p_item);
 void GI_wait_take(GraphicItem_t *p_item);
-void GI_give(GraphicItem_t *p_item);
+void GI_giveBack(GraphicItem_t *p_item);
 
 #endif

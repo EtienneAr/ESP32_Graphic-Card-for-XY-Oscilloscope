@@ -29,38 +29,15 @@ esp_err_t app_main()
 	while(1) {
 		
 		XYPlotter_delete(objects[0]);
-		XYPlotter_delete(objects[1]);
-		XYPlotter_delete(objects[2]);
-		XYPlotter_delete(objects[3]);
-		XYPlotter_delete(objects[4]);
 		objects[0] = DRAWLINE(size, 0, 72);
+		XYPlotter_delete(objects[1]);
 		objects[1] = DRAWLINE(size, 72, 144);
+		XYPlotter_delete(objects[2]);
 		objects[2] = DRAWLINE(size, 144, 216);
+		XYPlotter_delete(objects[3]);
 		objects[3] = DRAWLINE(size, 216, 288);
+		XYPlotter_delete(objects[4]);
 		objects[4] = DRAWLINE(size, 288, 0);
-		
-
-		/*
-		XYPlotter_delete(objects[0]);
-		objects[0] = XYPlotter_drawLine(127+size, 127+size, 127-size, 127+size, pen);
-		XYPlotter_delete(objects[1]);
-		objects[1] = XYPlotter_drawLine(127+size, 127+size, 127+size, 127-size, pen);
-		XYPlotter_delete(objects[2]);
-		objects[2] = XYPlotter_drawLine(127-size, 127-size, 127-size, 127+size, pen);
-		XYPlotter_delete(objects[3]);
-		objects[3] = XYPlotter_drawLine(127-size, 127-size, 127+size, 127-size, pen);
-		*/
-
-		/*
-		XYPlotter_delete(objects[0]);
-		objects[0] = XYPlotter_drawLine(255, 255, 0, 255, pen);
-		XYPlotter_delete(objects[1]);
-		objects[1] = XYPlotter_drawLine(255, 255, 255, 0, pen);
-		XYPlotter_delete(objects[2]);
-		objects[2] = XYPlotter_drawLine(0, 0, 0, 255, pen);
-		XYPlotter_delete(objects[3]);
-		objects[3] = XYPlotter_drawLine(0, 0, 255, 0, pen);
-		*/
 
 		size = cnt + 27;
 		cnt = (cnt+1) % 100;
