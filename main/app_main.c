@@ -13,11 +13,20 @@ static const char* TAG = "Main_app";
 
 esp_err_t app_main()
 {
-    XYPlotter_init(1000000);
+    XYPlotter_init(441000);
     esp_log_level_set("I2S", ESP_LOG_INFO);
 
-    Pen_t pen = {.spacing = 1, .intensity = 1};
+    Pen_t pen = {.spacing = 1, .intensity = 2};
 
+    /*
+	XYPlotter_drawLine(0, 0, 255, 255, pen);
+	XYPlotter_drawLine(255, 0, 0, 0, pen);
+	XYPlotter_drawLine(255, 255, 255, 0, pen);
+	XYPlotter_drawLine(0, 255, 255, 255, pen);
+    XYPlotter_drawLine(0, 0, 0, 255, pen);
+	*/
+
+    
 	XYPlotter_drawLine(255-17, 13, 255-80, 18, pen);
 	XYPlotter_drawLine(255-80, 18, 255-79, 59, pen);
 	XYPlotter_drawLine(255-79, 59, 255-53, 58, pen);
@@ -79,6 +88,7 @@ esp_err_t app_main()
 	XYPlotter_drawLine(255-209, 191, 255-156, 229, pen);
 	XYPlotter_drawLine(255-156, 229, 255-172, 254, pen);
 	XYPlotter_drawLine(255-181, 212, 255-196, 242, pen);
+	
 
     return ESP_OK;
 }

@@ -15,8 +15,6 @@ static const char* TAG = "XYPlotter";
 
 #define max(x,y) ((x)>(y) ? (x) : (y))
 
-static int id_incr = 0;
-
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
 	GI_initMutex();
@@ -30,11 +28,12 @@ void _XYPlotter_feeder() {
 		GraphicItem_t *p_item = GI_get_next_take();
 		if(p_item != NULL) {
 			if(p_item->isVisible && p_item->sizeof_points > 0) {
-				I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
+				I2SManager_write_16bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
 			}
 			GI_giveBack(p_item);
+		} else {
+			vTaskDelay(1);
 		}
-		vTaskDelay(1);
     }
     vTaskDelete(NULL);
 }
@@ -71,8 +70,8 @@ GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 
 	Coord_t runningPoint;
 	for(int n=0;n<macroPointsNb;n++) {
-		runningPoint.x = x1 + n * (x2 - x1) / max(macroPointsNb-1, 1);
-		runningPoint.y = y1 + n * (y2 - y1) / max(macroPointsNb-1, 1);
+		runningPoint.x = x2 + n * (x1 - x2) / max(macroPointsNb-1, 1);
+		runningPoint.y = y2 + n * (y1 - y2) / max(macroPointsNb-1, 1);
 		for(int i=0;i<pen.intensity;i++) {
 			p_item->points.coord[n * pen.intensity + i ] = runningPoint;
 		}

@@ -10,7 +10,7 @@ static const char* TAG = "I2S-Manager";
 
 #define I2S_PORT ((i2s_port_t) 0)
 #define I2S_BUF_LEN 1024
-#define I2S_BUF_COUNT 4
+#define I2S_BUF_COUNT 8
 
 #define min(x,y) ((x)<(y) ? (x) : (y))
 
@@ -21,7 +21,7 @@ void I2SManager_init(int rate) {
         .mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
         .sample_rate =  rate,
         .bits_per_sample = 16,
-	    .communication_format = I2S_COMM_FORMAT_I2S_MSB, //?
+	    .communication_format = I2S_COMM_FORMAT_STAND_I2S,
 	    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
 	    .intr_alloc_flags = 0,
 	    .dma_buf_count = I2S_BUF_COUNT,
