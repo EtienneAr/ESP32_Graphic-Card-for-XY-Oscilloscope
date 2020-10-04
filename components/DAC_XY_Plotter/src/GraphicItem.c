@@ -25,7 +25,6 @@ void _delete_GI(GraphicItem_t* p_item) {
 		if(p_item->points.bytes != NULL) {
 			free(p_item->points.bytes);
 		}
-		}
 		free(p_item);
 	}
 }
