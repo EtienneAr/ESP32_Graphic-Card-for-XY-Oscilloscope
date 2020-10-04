@@ -90,5 +90,28 @@ esp_err_t app_main()
 	XYPlotter_drawLine(255-181, 212, 255-196, 242, pen);
 	
 
+	GI_uid_t objects[5] = {NULL};
+	int size = 0;
+	int cnt = 0;
+	while(1) {
+		
+		XYPlotter_delete(objects[0]);
+		XYPlotter_delete(objects[1]);
+		XYPlotter_delete(objects[2]);
+		XYPlotter_delete(objects[3]);
+		XYPlotter_delete(objects[4]);
+		objects[0] = DRAWLINE(size, 0, 72);
+		objects[1] = DRAWLINE(size, 72, 144);
+		objects[2] = DRAWLINE(size, 144, 216);
+		objects[3] = DRAWLINE(size, 216, 288);
+		objects[4] = DRAWLINE(size, 288, 0);
+
+		//ESP_LOGW(TAG, "-Free heap memory : %d", xPortGetFreeHeapSize());
+		size = cnt + 27;
+		cnt = (cnt+1) % 100;
+		vTaskDelay(10);
+		//ESP_LOGW(TAG, "Free heap memory : %d", xPortGetFreeHeapSize());
+	}
+
     return ESP_OK;
 }

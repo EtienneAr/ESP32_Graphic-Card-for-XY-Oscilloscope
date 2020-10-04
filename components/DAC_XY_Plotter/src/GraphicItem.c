@@ -21,10 +21,13 @@ GraphicItem_t* _new_GI() {
 }
 
 void _delete_GI(GraphicItem_t* p_item) {
-	if(p_item->points.bytes != NULL) {
-		free(p_item->points.bytes);
+	if(p_item != NULL) {
+		if(p_item->points.bytes != NULL) {
+			free(p_item->points.bytes);
+		}
+		}
+		free(p_item);
 	}
-	free(p_item);
 }
 
 GraphicItem_t* GI_create_take() {
@@ -52,6 +55,11 @@ void GI_delete(GraphicItem_t* p_item) {
 	GI_wait_take(p_item);
 
 	xSemaphoreTake(linkedlistMutex, portMAX_DELAY);
+	//Change first element of the list if necessary
+	if(p_first_item == p_item) {
+		p_first_item = p_item->p_next;
+	}
+
 	//Move current pointer is necessary
 	if(p_next_item == p_item) {
 		p_next_item = p_item->p_next;
@@ -63,9 +71,6 @@ void GI_delete(GraphicItem_t* p_item) {
 	}
 	if(p_item->p_next != NULL) {
 		p_item->p_next->p_prev = p_item->p_prev;
-	}
-	if(p_first_item == p_item) {
-		p_first_item = p_item->p_next;
 	}
 	xSemaphoreGive(linkedlistMutex);
 
@@ -92,6 +97,9 @@ GraphicItem_t* GI_get_next_take() {
 		}
 	} while(ret != NULL && !ret->isAvailable); //While there is a next element and this one taken already
 
+	if(ret != NULL) {
+		ret->isAvailable = false;
+	}
 	xSemaphoreGive(linkedlistMutex);
 	xSemaphoreGive(availabilityMutex);
 
