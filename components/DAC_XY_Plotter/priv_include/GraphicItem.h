@@ -7,9 +7,7 @@
 
 
 typedef struct Coord {
-	uint8_t padding_x;
 	uint8_t x;
-	uint8_t padding_y;
 	uint8_t y;
 } Coord_t;
 

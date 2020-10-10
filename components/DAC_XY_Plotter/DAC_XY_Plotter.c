@@ -28,7 +28,7 @@ void _XYPlotter_feeder() {
 		GraphicItem_t *p_item = GI_get_next_take();
 		if(p_item != NULL) {
 			if(p_item->isVisible && p_item->sizeof_points > 0) {
-				I2SManager_write_16bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
+				I2SManager_write_8bitLR(p_item->points.bytes, p_item->sizeof_points, &bytesWritten, portMAX_DELAY);
 			}
 			GI_giveBack(p_item);
 		} else {
