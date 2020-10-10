@@ -110,20 +110,17 @@ size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensit
 		case 'L':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+7*height_factor, x+0*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+3*height_factor, x+3*height_factor, y+3*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+3*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'K':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+7*height_factor, x+0*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+4*height_factor, x+3*height_factor, y+7*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+2*height_factor, y+5*height_factor, x+4*height_factor, y+3*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+4*height_factor, y+3*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'J':
 			size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+7*height_factor, x+3*height_factor, y+4*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+4*height_factor, x+2*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+2*height_factor, y+3*height_factor, x+1*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+1*height_factor, y+3*height_factor, x+0*height_factor, y+4*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+4*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'I':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+7*height_factor, x+2*height_factor, y+7*height_factor, 1, intensity);
@@ -332,12 +329,10 @@ size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensit
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+5*height_factor, x+3*height_factor, y+5*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+5*height_factor, x+0*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+3*height_factor, x+3*height_factor, y+3*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+3*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'y':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+5*height_factor, x+1*height_factor, y+3*height_factor, 1, intensity);
 			size += GO_drawLine(SAFE_PTR(start, size), x+2*height_factor, y+5*height_factor, x+0*height_factor, y+1*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+1*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'x':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+5*height_factor, x+3*height_factor, y+3*height_factor, 1, intensity);
@@ -426,7 +421,6 @@ size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensit
 			break;
 		case 'i':
 			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+5*height_factor, x+0*height_factor, y+3*height_factor, 1, intensity);
-			size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+3*height_factor, x+4*height_factor, y+-12*height_factor, 1, intensity);
 			break;
 		case 'j':
 			size += GO_drawLine(SAFE_PTR(start, size), x+2*height_factor, y+5*height_factor, x+2*height_factor, y+2*height_factor, 1, intensity);
