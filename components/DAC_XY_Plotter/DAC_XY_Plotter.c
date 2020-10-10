@@ -44,7 +44,7 @@ void XYPlotter_delete(GI_uid_t uid) {
 GI_uid_t XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawPoint_len(x, y, pen.intensity);
+	p_item->sizeof_points = GO_drawPoint(NULL, x, y, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
 	GO_drawPoint(p_item->points.bytes, x, y, pen.intensity);
@@ -56,7 +56,7 @@ GI_uid_t XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawLine_len(x1, y1, x2, y2, pen.spacing, pen.intensity);
+	p_item->sizeof_points = GO_drawLine(NULL, x1, y1, x2, y2, pen.spacing, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
 	GO_drawLine(p_item->points.bytes, x1, y1, x2, y2, pen.spacing, pen.intensity);
@@ -69,7 +69,7 @@ GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 GI_uid_t XYPlotter_drawRect(int x1, int y1, int x2, int y2, Pen_t pen){
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawRect_len(x1, y1, x2, y2, pen.spacing, pen.intensity);
+	p_item->sizeof_points = GO_drawRect(NULL, x1, y1, x2, y2, pen.spacing, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
 	GO_drawRect(p_item->points.bytes, x1, y1, x2, y2, pen.spacing, pen.intensity);
@@ -82,7 +82,7 @@ GI_uid_t XYPlotter_drawRect(int x1, int y1, int x2, int y2, Pen_t pen){
 GI_uid_t XYPlotter_drawArc(int x, int y, int r, float a1, float a2, Pen_t pen){
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawArc_len(x, y, r, a1, a2, pen.spacing, pen.intensity);
+	p_item->sizeof_points = GO_drawArc(NULL, x, y, r, a1, a2, pen.spacing, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
 	GO_drawArc(p_item->points.bytes, x, y, r, a1, a2, pen.spacing, pen.intensity);
@@ -92,13 +92,13 @@ GI_uid_t XYPlotter_drawArc(int x, int y, int r, float a1, float a2, Pen_t pen){
 }
 
 
-GI_uid_t XYPlotter_drawLetter_A(int x, int y, float size, Pen_t pen){
+GI_uid_t XYPlotter_drawLetter_A(int x, int y, float height, Pen_t pen){
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawLetter_A_len(x, y, size, pen.intensity);
+	p_item->sizeof_points = GO_drawLetter_A(NULL, x, y, height, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	GO_drawLetter_A(p_item->points.bytes, x, y, size, pen.intensity);
+	GO_drawLetter_A(p_item->points.bytes, x, y, height, pen.intensity);
 
 	GI_giveBack(p_item);
 	return (GI_uid_t) p_item;
