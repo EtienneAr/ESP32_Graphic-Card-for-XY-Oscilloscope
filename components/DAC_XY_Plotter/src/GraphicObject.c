@@ -93,14 +93,22 @@ size_t GO_drawRect(void* start, int x1, int y1, int x2, int y2, int spacing, int
  * Letters
  */
 
-size_t GO_drawLetter_A(void* start, int x, int y, float height, int intensity) {
+size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensity) {
     size_t size = 0;
 
-    size += GO_drawLine(SAFE_PTR(start, size), x+0*height, y+5*height, x+3*height, y+5*height, 1, intensity);
-    size += GO_drawLine(SAFE_PTR(start, size), x+3*height, y+5*height, x+3*height, y+3*height, 1, intensity);
-    size += GO_drawLine(SAFE_PTR(start, size), x+3*height, y+3*height, x+0*height, y+3*height, 1, intensity);
-    size += GO_drawLine(SAFE_PTR(start, size), x+0*height, y+3*height, x+0*height, y+4*height, 1, intensity);
-    size += GO_drawLine(SAFE_PTR(start, size), x+0*height, y+4*height, x+3*height, y+4*height, 1, intensity);
+    float height_factor = height / 7.;
+
+    switch(c) {
+        case 'a':
+            size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+5*height_factor, x+3*height_factor, y+5*height_factor, 1, intensity);
+            size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+5*height_factor, x+3*height_factor, y+3*height_factor, 1, intensity);
+            size += GO_drawLine(SAFE_PTR(start, size), x+3*height_factor, y+3*height_factor, x+0*height_factor, y+3*height_factor, 1, intensity);
+            size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+3*height_factor, x+0*height_factor, y+4*height_factor, 1, intensity);
+            size += GO_drawLine(SAFE_PTR(start, size), x+0*height_factor, y+4*height_factor, x+3*height_factor, y+4*height_factor, 1, intensity);
+            break;
+        default:
+            break;
+        }
 
     return size;
 }
