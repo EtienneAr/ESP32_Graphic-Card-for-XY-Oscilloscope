@@ -126,7 +126,7 @@ bool GI_try_take(GraphicItem_t *p_item) {
 
 
 void GI_giveBack(GraphicItem_t *p_item) {
-	xSemaphoreTake(availabilityMutex, portMAX_DELAY);
+	//xSemaphoreTake(availabilityMutex, portMAX_DELAY);
 	p_item->isAvailable = true;
-	xSemaphoreGive(availabilityMutex);
+	//xSemaphoreGive(availabilityMutex);
 }
