@@ -1,7 +1,9 @@
-import json
+from sys import argv
 import os
+import json
 
-out_filepath = "components/DAC_XY_Plotter/src/GraphicObject_char.c"
+in_filepath = argv[1]
+out_filepath = argv[2]
 
 try:
 	os.remove(out_filepath)
@@ -10,7 +12,7 @@ except:
 finally:
 	out_file = open(out_filepath, "x")
 
-in_file = open("font.json")
+in_file = open(in_filepath)
 jsonParsed = json.load(in_file)
 
 def out_writeline(indent, line):
