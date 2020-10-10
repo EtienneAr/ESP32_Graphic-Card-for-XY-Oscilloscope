@@ -5,15 +5,12 @@
 
 #include "GraphicItem.h"
 
-#include <math.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
 static const char* TAG = "XYPlotter";
 #include "esp_err.h"
 #include "esp_log.h"
-
-#define max(x,y) ((x)>(y) ? (x) : (y))
 
 void XYPlotter_init(int rate) {
 	I2SManager_init(rate);
@@ -61,21 +58,10 @@ GI_uid_t XYPlotter_drawPoint(int x, int y, Pen_t pen) {
 GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 	GraphicItem_t *p_item = GI_create_take();
 
-	const float length = sqrt(pow(x1-x2, 2) + pow(y1-y2, 2));
-	const int macroPointsNb = (length/pen.spacing);
-	const int subPointsNb = macroPointsNb * pen.intensity;
-	
-	p_item->sizeof_points = subPointsNb * sizeof(Coord_t);
+	p_item->sizeof_points = GO_drawLine_len(x1, y1, x2, y2, pen);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	Coord_t runningPoint;
-	for(int n=0;n<macroPointsNb;n++) {
-		runningPoint.x = x2 + n * (x1 - x2) / max(macroPointsNb-1, 1);
-		runningPoint.y = y2 + n * (y1 - y2) / max(macroPointsNb-1, 1);
-		for(int i=0;i<pen.intensity;i++) {
-			p_item->points.coord[n * pen.intensity + i ] = runningPoint;
-		}
-	}
+	GO_drawLine(p_item->points.bytes, x1, y1, x2, y2, pen);
 
 	GI_giveBack(p_item);
 	return (GI_uid_t) p_item;

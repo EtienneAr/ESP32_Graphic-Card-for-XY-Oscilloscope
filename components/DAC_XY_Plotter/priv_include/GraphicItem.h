@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
 typedef struct Coord {
 	uint8_t x;
 	uint8_t y;
