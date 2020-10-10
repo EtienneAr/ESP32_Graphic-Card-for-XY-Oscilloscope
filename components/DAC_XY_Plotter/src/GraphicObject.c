@@ -85,3 +85,26 @@ size_t GO_drawRect(void* start, int x1, int y1, int x2, int y2, int spacing, int
 
     return size;
 }
+
+/*
+ * String
+ */
+
+size_t GO_drawString(void* start, const char* str, int x, int y, float height, int intensity) {
+    size_t size = 0 ;
+
+    float x_off = 0;
+    const float x_step = 5 * height / 7;
+
+    for(int i=0;i < strlen(str);i++) {
+        if(x + x_off > 255 - x_step) {
+            break;
+        }
+
+        size += GO_drawChar(SAFE_PTR(start, size), str[i], x+x_off, y, height, intensity);
+        
+        x_off += x_step;
+    }
+
+    return size;
+}

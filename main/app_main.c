@@ -15,10 +15,10 @@ static const char* TAG = "Main_app";
 
 esp_err_t app_main()
 {
-    XYPlotter_init(441000);
+    XYPlotter_init(1000000);
     esp_log_level_set("I2S", ESP_LOG_INFO);
 
-    Pen_t pen = {.spacing = 1, .intensity = 2};
+    Pen_t pen = {.spacing = 1, .intensity = 5};
 
     /*
 	XYPlotter_drawLine(0, 0, 255, 255, pen);
@@ -29,10 +29,11 @@ esp_err_t app_main()
 	*/
 
     //XYPlotter_drawLine(50, 150, 50, 50, pen);
-    XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
-    XYPlotter_drawRect(50, 50, 150, 150, pen);
-    XYPlotter_drawChar('a', 100,100, 28, pen);
-    XYPlotter_drawChar('B', 150,100, 28, pen);
+    //XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
+    //XYPlotter_drawRect(50, 50, 150, 150, pen);
+    
+    XYPlotter_drawString("Bonjour, monde !", 20, 127, 20, pen);
+    XYPlotter_drawString("Et CC Tristan ;p ", 55, 70, 20, pen);
 
 	
 	
