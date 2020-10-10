@@ -21,6 +21,9 @@ def out_writeline(indent, line):
 	out_file.write(line)
 	out_file.write('\n')
 
+def code_c_line(x1, y1, x2, y2):
+	return "size += GO_drawLine(SAFE_PTR(start, size), x+" + str(x1) + "*height_factor, y+" + str(y1) + "*height_factor, x+" + str(x2) + "*height_factor, y+" + str(y2) + "*height_factor, 1, intensity);"
+
 
 out_writeline(0,"#include \"GraphicObject.h\"")
 out_writeline(0,"")
@@ -46,9 +49,20 @@ for char in jsonParsed:
 			x2 = char_points[i] % 5
 			y2 = 7 - char_points[i] // 5
 			
-			out_writeline(3, "size += GO_drawLine(SAFE_PTR(start, size), x+" + str(x1) + "*height_factor, y+" + str(y1) + "*height_factor, x+" + str(x2) + "*height_factor, y+" + str(y2) + "*height_factor, 1, intensity);")	
+			out_writeline(3, code_c_line(x1, y1, x2, y2))	
 
-	out_writeline(2, "break;")
+	out_writeline(3, "break;")
+
+out_writeline(2, "default:")
+
+out_writeline(3, code_c_line(0, 0, 4, 0))
+out_writeline(3, code_c_line(4, 0, 4, 7))
+out_writeline(3, code_c_line(4, 7, 0, 7))
+out_writeline(3, code_c_line(0, 7, 0, 0))
+out_writeline(3, code_c_line(0, 0, 4, 7))
+out_writeline(3, code_c_line(0, 7, 4, 0))
+
+out_writeline(3, "break;")
 
 out_writeline(1, "}")
 out_writeline(1, "return size;")
