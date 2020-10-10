@@ -110,7 +110,7 @@ void GO_drawArc(void* start, int x, int y, float r, float a1, float a2, int spac
     for(int n=0;n<macroPointsNb;n++) {
         runningAngle = a2 + n * (a1 - a2) / max(macroPointsNb-1, 1);
         runningPoint.x = x + r * cos(runningAngle);
-        runningPoint.y = x + y * sin(runningAngle);
+        runningPoint.y = y + r * sin(runningAngle);
         for(int i=0;i<intensity;i++) {
             pt_list[n * intensity + i ] = runningPoint;
         }

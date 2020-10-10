@@ -28,68 +28,10 @@ esp_err_t app_main()
     XYPlotter_drawLine(0, 0, 0, 255, pen);
 	*/
 
-    
-	XYPlotter_drawLine(13, 255-17, 18, 255-80, pen);
-	XYPlotter_drawLine(18, 255-80, 59, 255-79, pen);
-	XYPlotter_drawLine(59, 255-79, 58, 255-53, pen);
-	XYPlotter_drawLine(58, 255-53, 16, 255-44, pen);
-	XYPlotter_drawLine(16, 255-44, 62, 255-40, pen);
-	XYPlotter_drawLine(62, 255-40, 59, 255-11, pen);
-	XYPlotter_drawLine(59, 255-11, 15, 255-16, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(73, 255-79, 72, 255-49, pen);
-	XYPlotter_drawLine(72, 255-49, 96, 255-49, pen);
-	XYPlotter_drawLine(96, 255-49, 95, 255-76, pen);
-	XYPlotter_drawLine(95, 255-76, 73, 255-78, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(103, 255-76, 103, 255-48, pen);
-	XYPlotter_drawLine(103, 255-48, 112, 255-71, pen);
-	XYPlotter_drawLine(112, 255-71, 115, 255-48, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(121, 255-48, 148, 255-49, pen);
-	XYPlotter_drawLine(148, 255-49, 133, 255-49, pen);
-	XYPlotter_drawLine(133, 255-49, 135, 255-75, pen);
-	XYPlotter_drawLine(135, 255-75, 121, 255-73, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(154, 255-49, 151, 255-77, pen);
-	XYPlotter_drawLine(151, 255-77, 168, 255-75, pen);
-	XYPlotter_drawLine(168, 255-75, 172, 255-50, pen);
-	XYPlotter_drawLine(172, 255-50, 154, 255-49, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(175, 255-49, 176, 255-73, pen);
-	XYPlotter_drawLine(176, 255-73, 191, 255-74, pen);
-	XYPlotter_drawLine(191, 255-74, 191, 255-48, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(199, 255-49, 200, 255-75, pen);
-	XYPlotter_drawLine(200, 255-75, 199, 255-50, pen);
-	XYPlotter_drawLine(199, 255-50, 219, 255-50, pen);
-	XYPlotter_drawLine(219, 255-50, 218, 255-62, pen);
-	XYPlotter_drawLine(218, 255-62, 199, 255-61, pen);
-	XYPlotter_drawLine(199, 255-61, 219, 255-75, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(11, 255-150, 30, 255-99, pen);
-	XYPlotter_drawLine(30, 255-99, 40, 255-132, pen);
-	XYPlotter_drawLine(40, 255-132, 81, 255-108, pen);
-	XYPlotter_drawLine(81, 255-108, 65, 255-166, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(77, 255-170, 100, 255-111, pen);
-	XYPlotter_drawLine(100, 255-111, 135, 255-123, pen);
-	XYPlotter_drawLine(135, 255-123, 106, 255-177, pen);
-	XYPlotter_drawLine(106, 255-177, 77, 255-170, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(120, 255-179, 143, 255-126, pen);
-	XYPlotter_drawLine(143, 255-126, 139, 255-186, pen);
-	XYPlotter_drawLine(139, 255-186, 175, 255-137, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(155, 255-194, 191, 255-141, pen);
-	XYPlotter_drawLine(191, 255-141, 209, 255-169, pen);
-	XYPlotter_drawLine(209, 255-169, 184, 255-197, pen);
-	XYPlotter_drawLine(184, 255-197, 155, 255-194, pen);
-	vTaskDelay(100);
-	XYPlotter_drawLine(230, 255-229, 191, 255-209, pen);
-	XYPlotter_drawLine(191, 255-209, 229, 255-156, pen);
-	XYPlotter_drawLine(229, 255-156, 254, 255-172, pen);
-	XYPlotter_drawLine(212, 255-181, 242, 255-196, pen);
+    XYPlotter_drawLine(50, 150, 50, 50, pen);
+    XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
+
+	
 	
 
 	GI_uid_t bar_L = NULL;
