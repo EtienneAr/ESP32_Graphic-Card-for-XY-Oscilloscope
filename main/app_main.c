@@ -18,7 +18,7 @@ esp_err_t app_main()
     XYPlotter_init(441000);
     esp_log_level_set("I2S", ESP_LOG_INFO);
 
-    Pen_t pen = {.spacing = 1, .intensity = 1};
+    Pen_t pen = {.spacing = 1, .intensity = 2};
 
     /*
 	XYPlotter_drawLine(0, 0, 255, 255, pen);
@@ -31,7 +31,8 @@ esp_err_t app_main()
     //XYPlotter_drawLine(50, 150, 50, 50, pen);
     XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
     XYPlotter_drawRect(50, 50, 150, 150, pen);
-    XYPlotter_drawLetter_A(100,100, 28, pen);
+    XYPlotter_drawChar('a', 100,100, 28, pen);
+    XYPlotter_drawChar('B', 150,100, 28, pen);
 
 	
 	

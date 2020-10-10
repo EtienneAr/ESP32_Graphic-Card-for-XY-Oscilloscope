@@ -92,13 +92,13 @@ GI_uid_t XYPlotter_drawArc(int x, int y, int r, float a1, float a2, Pen_t pen){
 }
 
 
-GI_uid_t XYPlotter_drawLetter_A(int x, int y, float height, Pen_t pen){
+GI_uid_t XYPlotter_drawChar(char c, int x, int y, float height, Pen_t pen){
 	GraphicItem_t *p_item = GI_create_take();
 
-	p_item->sizeof_points = GO_drawChar(NULL, 'a', x, y, height, pen.intensity);
+	p_item->sizeof_points = GO_drawChar(NULL, c, x, y, height, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	GO_drawChar(p_item->points.bytes, 'a', x, y, height, pen.intensity);
+	GO_drawChar(p_item->points.bytes, c, x, y, height, pen.intensity);
 
 	GI_giveBack(p_item);
 	return (GI_uid_t) p_item;
