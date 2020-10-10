@@ -1,6 +1,10 @@
 #ifndef GRAPHICAL_OBJECT_H
 #define GRAPHICAL_OBJECT_H
 
+#include <stdlib.h>
+#define SAFE_WRITE(tab, pos, data) if(tab != NULL) { tab[pos] = data; }
+#define SAFE_PTR(start, offset) (start == NULL ? NULL : start+offset)
+
 size_t GO_drawPoint(void* start, int x, int y, int intensity);
 
 size_t GO_drawLine(void* start, int x1, int y1, int x2, int y2, int spacing, int intensity);
