@@ -8,7 +8,7 @@
  * Point
  */
 
-int GO_drawPoint_len(int x, int y, int intensity) {
+size_t GO_drawPoint_len(int x, int y, int intensity) {
 	return intensity * sizeof(Coord_t);
 }
 
@@ -24,7 +24,7 @@ void GO_drawPoint(void* start, int x, int y, int intensity) {
  * Line
  */
 
-int  GO_drawLine_len( int x1, int y1, int x2, int y2, int spacing, int intensity) {
+size_t GO_drawLine_len( int x1, int y1, int x2, int y2, int spacing, int intensity) {
 	const float length = sqrt(pow(x1-x2, 2) + pow(y1-y2, 2));
 	const int macroPointsNb = (length/spacing);
 	const int subPointsNb = macroPointsNb * intensity;
