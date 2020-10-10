@@ -116,3 +116,36 @@ void GO_drawArc(void* start, int x, int y, float r, float a1, float a2, int spac
         }
     }
 }
+
+
+/*
+ * Letters
+ */
+
+size_t GO_drawLetter_A_len(int x, int y, float size, int intensity) {
+    size_t res = 0;
+
+    res += GO_drawLine_len(x+0*size, y+5*size, x+3*size, y+5*size, 1, intensity);
+    res += GO_drawLine_len(x+3*size, y+5*size, x+3*size, y+3*size, 1, intensity);
+    res += GO_drawLine_len(x+3*size, y+3*size, x+0*size, y+3*size, 1, intensity);
+    res += GO_drawLine_len(x+0*size, y+3*size, x+0*size, y+4*size, 1, intensity);
+    res += GO_drawLine_len(x+0*size, y+4*size, x+3*size, y+4*size, 1, intensity);
+
+    return res;
+}
+
+void GO_drawLetter_A(void* start, int x, int y, float size, int intensity) {
+    void* ptr = start;
+
+    GO_drawLine(ptr, x+0*size, y+5*size, x+3*size, y+5*size, 1, intensity);
+    ptr += GO_drawLine_len(x+0*size, y+5*size, x+3*size, y+5*size, 1, intensity);
+    GO_drawLine(ptr, x+3*size, y+5*size, x+3*size, y+3*size, 1, intensity);
+    ptr += GO_drawLine_len(x+3*size, y+5*size, x+3*size, y+3*size, 1, intensity);
+    GO_drawLine(ptr, x+3*size, y+3*size, x+0*size, y+3*size, 1, intensity);
+    ptr += GO_drawLine_len(x+3*size, y+3*size, x+0*size, y+3*size, 1, intensity);
+    GO_drawLine(ptr, x+0*size, y+3*size, x+0*size, y+4*size, 1, intensity);
+    ptr += GO_drawLine_len(x+0*size, y+3*size, x+0*size, y+4*size, 1, intensity);
+    GO_drawLine(ptr, x+0*size, y+4*size, x+3*size, y+4*size, 1, intensity);
+    ptr += GO_drawLine_len(x+0*size, y+4*size, x+3*size, y+4*size, 1, intensity);
+
+}

@@ -31,6 +31,7 @@ esp_err_t app_main()
     //XYPlotter_drawLine(50, 150, 50, 50, pen);
     XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
     XYPlotter_drawRect(50, 50, 150, 150, pen);
+    XYPlotter_drawLetter_A(100,100, 4, pen);
 
 	
 	
