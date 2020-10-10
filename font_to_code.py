@@ -5,6 +5,9 @@ import json
 in_filepath = argv[1]
 out_filepath = argv[2]
 
+x_width = int(argv[3])
+y_height = int(argv[4])
+
 try:
 	os.remove(out_filepath)
 except:
@@ -43,11 +46,11 @@ for char in jsonParsed:
 
 	for i in range(1, len(char_points)):
 		if(char_points[i-1] >= 0 and char_points[i] >= 0):
-			x1 = char_points[i-1] % 5
-			y1 = 7 - char_points[i-1] // 5
+			x1 = char_points[i-1] % x_width
+			y1 = y_height - char_points[i-1] // x_width
 			
-			x2 = char_points[i] % 5
-			y2 = 7 - char_points[i] // 5
+			x2 = char_points[i] % x_width
+			y2 = y_height - char_points[i] // x_width
 			
 			out_writeline(3, code_c_line(x1, y1, x2, y2))	
 
