@@ -35,8 +35,8 @@ esp_err_t app_main()
     XYPlotter_drawArc(127, 127, 140, 0, 3.141592, pen_circ);
     //XYPlotter_drawRect(50, 50, 150, 150, pen);
     
-    XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
-    XYPlotter_drawString("Et CC Tristan ;p ", 40, 70, 21, pen);
+    GI_uid_t txtMonde = XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
+    GI_uid_t txtTristan = XYPlotter_drawString("Et CC Tristan   ;P ", 40, 70, 21, pen);
 
 	//XYPlotter_drawString("r s t u v|w x y z.,:;!?\\/$ % +-^=({[)}]", 0, 255, 28, pen);
 	
@@ -94,6 +94,9 @@ esp_err_t app_main()
 		y_ball = fmax(fmin(y_ball, 255), 0);
 
 		vTaskDelay(10);
+
+		XYPlotter_move(txtMonde, -1 , 0);
+		XYPlotter_setVisibility(txtTristan, vx_ball < 0);
 		//ESP_LOGW(TAG, "Free heap memory : %d", xPortGetFreeHeapSize());
 	}
 
