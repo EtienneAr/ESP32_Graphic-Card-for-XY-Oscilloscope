@@ -53,8 +53,6 @@ esp_err_t app_main()
 	float y_bar_L = 127;
 	float y_bar_R = 127;
 
-	int size = 0;
-	int cnt = 0;
 	while(1) {
 		Pen_t penLine = {.spacing = 1, .intensity = 1};
 		Pen_t penPoint = {.spacing = 1, .intensity = 5};

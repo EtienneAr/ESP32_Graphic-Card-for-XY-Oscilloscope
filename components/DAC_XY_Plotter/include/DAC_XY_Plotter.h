@@ -1,8 +1,7 @@
 #ifndef DAC_XY_PLOTTER
 #define DAC_XY_PLOTTER
 
-#include <string.h>
-#include <stdio.h>
+#include <stdbool.h>
 
 typedef struct Pen {
 	float spacing;
@@ -21,5 +20,8 @@ GI_uid_t XYPlotter_drawRect(float x1, float y1, float x2, float y2, Pen_t pen);
 GI_uid_t XYPlotter_drawArc(float x, float y, float r, float a1, float a2, Pen_t pen);
 GI_uid_t XYPlotter_drawChar(char c, float x, float y, float height, Pen_t pen);
 GI_uid_t XYPlotter_drawString(const char* str, float x, float y, float height, Pen_t pen);
+
+void XYPlotter_move(GI_uid_t, int dx, int dy);
+void XYPlotter_setVisibility(GI_uid_t uid, bool isVisible);
 
 #endif
