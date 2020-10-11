@@ -1,6 +1,6 @@
 #include "GraphicObject.h"
 
-size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensity) {
+size_t GO_drawChar(void* start, char c, float x, float y, float height, int intensity) {
 	size_t size = 0;
 	float height_factor = height / 7.;
 	switch(c) {

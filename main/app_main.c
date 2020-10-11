@@ -36,7 +36,7 @@ esp_err_t app_main()
     //XYPlotter_drawRect(50, 50, 150, 150, pen);
     
     XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
-    XYPlotter_drawString("Et CC Tristan ;p ", 55, 70, 21, pen);
+    XYPlotter_drawString("Et CC Tristan ;p ", 40, 70, 21, pen);
 
 	//XYPlotter_drawString("r s t u v|w x y z.,:;!?\\/$ % +-^=({[)}]", 0, 255, 28, pen);
 	

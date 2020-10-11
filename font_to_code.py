@@ -33,7 +33,7 @@ def code_c_point(x, y):
 
 out_writeline(0,"#include \"GraphicObject.h\"")
 out_writeline(0,"")
-out_writeline(0,"size_t GO_drawChar(void* start, char c, int x, int y, float height, int intensity) {")
+out_writeline(0,"size_t GO_drawChar(void* start, char c, float x, float y, float height, int intensity) {")
 
 out_writeline(1,"size_t size = 0;")
 out_writeline(1,"float height_factor = height / 7.;")
