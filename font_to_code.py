@@ -27,6 +27,9 @@ def out_writeline(indent, line):
 def code_c_line(x1, y1, x2, y2):
 	return "size += GO_drawLine(SAFE_PTR(start, size), x+" + str(x1) + "*height_factor, y+" + str(y1) + "*height_factor, x+" + str(x2) + "*height_factor, y+" + str(y2) + "*height_factor, 1, intensity);"
 
+def code_c_point(x, y):
+	return "size += GO_drawPoint(SAFE_PTR(start, size), x+" + str(x) + "*height_factor, y+" + str(y) + "*height_factor, intensity*2);"
+
 
 out_writeline(0,"#include \"GraphicObject.h\"")
 out_writeline(0,"")
@@ -52,7 +55,10 @@ for char in jsonParsed:
 			x2 = char_points[i] % x_width
 			y2 = y_height - char_points[i] // x_width
 			
-			out_writeline(3, code_c_line(x1, y1, x2, y2))	
+			if(x1 == x2 and y1 == y2):
+				out_writeline(3, code_c_point(x1, y1))
+			else:
+				out_writeline(3, code_c_line(x1, y1, x2, y2))	
 
 	out_writeline(3, "break;")
 

@@ -18,7 +18,8 @@ esp_err_t app_main()
     XYPlotter_init(1000000);
     esp_log_level_set("I2S", ESP_LOG_INFO);
 
-    Pen_t pen = {.spacing = 1, .intensity = 5};
+    Pen_t pen = {.spacing = 1, .intensity = 2};
+    Pen_t pen_circ = {.spacing = 1, .intensity = 1};
 
     /*
 	XYPlotter_drawLine(0, 0, 255, 255, pen);
@@ -29,12 +30,15 @@ esp_err_t app_main()
 	*/
 
     //XYPlotter_drawLine(50, 150, 50, 50, pen);
-    //XYPlotter_drawArc(100, 150, 50, 0, 3.141592, pen);
+    XYPlotter_drawArc(127, 127, 127, 0, 2*3.141592, pen_circ);
+    XYPlotter_drawArc(127, 127, 110, 0.3, 3.141592-0.3, pen_circ);
+    XYPlotter_drawArc(127, 127, 140, 0, 3.141592, pen_circ);
     //XYPlotter_drawRect(50, 50, 150, 150, pen);
     
-    XYPlotter_drawString("Bonjour, monde !", 20, 127, 20, pen);
-    XYPlotter_drawString("Et CC Tristan ;p ", 55, 70, 20, pen);
+    XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
+    XYPlotter_drawString("Et CC Tristan ;p ", 55, 70, 21, pen);
 
+	//XYPlotter_drawString("r s t u v|w x y z.,:;!?\\/$ % +-^=({[)}]", 0, 255, 28, pen);
 	
 	
 

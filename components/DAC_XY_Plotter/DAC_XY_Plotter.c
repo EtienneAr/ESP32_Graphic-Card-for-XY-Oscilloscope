@@ -59,7 +59,7 @@ GI_uid_t XYPlotter_drawLine(int x1, int y1, int x2, int y2, Pen_t pen) {
 	p_item->sizeof_points = GO_drawLine(NULL, x1, y1, x2, y2, pen.spacing, pen.intensity);
 	p_item->points.bytes = malloc(p_item->sizeof_points);
 
-	GO_drawLine(p_item->points.bytes, x1, y1, x2, y2, pen.spacing, pen.intensity);
+	GO_drawLine(p_item->points.bytes, x2, y2, x1, y1, pen.spacing, pen.intensity);
 
 	GI_giveBack(p_item);
 	return (GI_uid_t) p_item;
