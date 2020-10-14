@@ -60,6 +60,10 @@ void XYPlotter_setVisibility(GI_uid_t uid, bool isVisible) {
 	GI_giveBack(p_item);
 }
 
+void XYPlotter_clearScreen() {
+	GI_delete_all();
+}
+
 GI_uid_t XYPlotter_drawPoint(float x, float y, Pen_t pen) {
 	GraphicItem_t *p_item = GI_create_take();
 

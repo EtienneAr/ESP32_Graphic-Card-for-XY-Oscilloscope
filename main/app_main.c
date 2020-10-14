@@ -35,16 +35,13 @@ esp_err_t app_main()
     XYPlotter_drawArc(127, 127, 140, 0, 3.141592, pen_circ);
     //XYPlotter_drawRect(50, 50, 150, 150, pen);
     
-    GI_uid_t txtMonde = XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
-    GI_uid_t txtTristan = XYPlotter_drawString("Et CC Tristan   ;P ", 40, 70, 21, pen);
+    XYPlotter_drawString("Bonjour, monde !", 10, 127, 21, pen);
+    XYPlotter_drawString("Et CC Tristan   ;P ", 40, 70, 21, pen);
 
 	//XYPlotter_drawString("r s t u v|w x y z.,:;!?\\/$ % +-^=({[)}]", 0, 255, 28, pen);
 	
 	
 
-	GI_uid_t bar_L = NULL;
-	GI_uid_t bar_R = NULL;
-	GI_uid_t ball = NULL;
 	float x_ball = 127;
 	float y_ball = 127;
 	float vx_ball = 1;
@@ -53,18 +50,15 @@ esp_err_t app_main()
 	float y_bar_L = 127;
 	float y_bar_R = 127;
 
+	vTaskDelay(1000);
 	while(1) {
-		Pen_t penLine = {.spacing = 1, .intensity = 1};
-		Pen_t penPoint = {.spacing = 1, .intensity = 5};
+		Pen_t penLine = {.spacing = 1, .intensity = 5};
+		Pen_t penPoint = {.spacing = 1, .intensity = 25};
 
-
-		XYPlotter_delete(bar_L);
-		XYPlotter_delete(bar_R);
-		XYPlotter_delete(ball);
-
-		bar_L = XYPlotter_drawLine(0  , y_bar_L-10, 0  , y_bar_L+10, penLine);
-		ball = XYPlotter_drawPoint(x_ball, y_ball, penPoint);
-		bar_R = XYPlotter_drawLine(255, y_bar_R-10, 255, y_bar_R+10, penLine);
+		XYPlotter_clearScreen();
+		XYPlotter_drawLine(0  , y_bar_L-10, 0  , y_bar_L+10, penLine);
+		XYPlotter_drawPoint(x_ball, y_ball, penPoint);
+		XYPlotter_drawLine(255, y_bar_R-10, 255, y_bar_R+10, penLine);
 
 
 		if(vx_ball > 0) {
@@ -94,9 +88,6 @@ esp_err_t app_main()
 		y_ball = fmax(fmin(y_ball, 255), 0);
 
 		vTaskDelay(10);
-
-		XYPlotter_move(txtMonde, -1 , 0);
-		XYPlotter_setVisibility(txtTristan, vx_ball < 0);
 		//ESP_LOGW(TAG, "Free heap memory : %d", xPortGetFreeHeapSize());
 	}
 

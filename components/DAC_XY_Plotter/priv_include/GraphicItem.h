@@ -26,6 +26,7 @@ typedef struct GraphicItem {
 
 GraphicItem_t* GI_create_take();
 void GI_delete(GraphicItem_t* p_item);
+void GI_delete_all();
 
 GraphicItem_t* GI_get_next_take();
 
