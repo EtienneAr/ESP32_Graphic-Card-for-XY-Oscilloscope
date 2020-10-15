@@ -28,6 +28,8 @@ CONFIG_APP_BUILD_USE_FLASH_SECTIONS=y
 #
 # DAC_XY_Plotter
 #
+CONFIG_FONT_FILE="font_thin.json"
+# end of DAC_XY_Plotter
 
 #
 # Application manager

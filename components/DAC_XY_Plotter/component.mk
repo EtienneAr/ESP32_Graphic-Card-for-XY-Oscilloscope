@@ -2,19 +2,27 @@ COMPONENT_ADD_INCLUDEDIRS := ./include
 
 COMPONENT_PRIV_INCLUDEDIRS +=  ./priv_include
 
-COMPONENT_SRCDIRS += ./src
 
-GENERATED_CODE_C_PATH = $(COMPONENT_PATH)/src/generated_srcs
-FONT_CODE_C_FILENAME_PREFIX := $(GENERATED_CODE_C_PATH)/GraphicObject_char
+GENERATED_CODE_C_RELATIVE_PATH := src/generated_srcs
+GENERATED_CODE_C_ABSOLUTE_PATH := $(COMPONENT_PATH)/$(GENERATED_CODE_C_RELATIVE_PATH)
+FONT_CODE_C_FILEPATH := $(GENERATED_CODE_C_ABSOLUTE_PATH)/GraphicObject_char.c
 
-COMPONENT_EXTRA_CLEAN := $(GENERATED_CODE_C_PATH)/*
+quote:="
+FONT_JSON_SRC_FILENAME := $(subst $(quote),,$(CONFIG_FONT_FILE)) 
+FONT_JSON_SRC_FILEPATH := $(COMPONENT_PATH)/data/$(FONT_JSON_SRC_FILENAME)
+
 
 $(COMPONENT_LIBRARY): generate_files
 
 .PHONY: generate_files
 
-generate_files: $(FONT_CODE_C_FILENAME_PREFIX)_thin.c $(FONT_CODE_C_FILENAME_PREFIX)_wide.c
+generate_files: $(FONT_CODE_C_FILEPATH)
+	@echo "Auto-Generating code"
 
-$(FONT_CODE_C_FILENAME_PREFIX)_%.c: $(COMPONENT_PATH)/data/font_%.json
-	@echo "Generating code for font $*"
+$(FONT_CODE_C_FILEPATH): $(FONT_JSON_SRC_FILEPATH)
+	@echo "Generating code for font from $<"
 	python3 $(COMPONENT_PATH)/font_to_code.py $< > $@
+
+
+COMPONENT_SRCDIRS += ./src ./$(GENERATED_CODE_C_RELATIVE_PATH)
+COMPONENT_EXTRA_CLEAN := $(GENERATED_CODE_C_ABSOLUTE_PATH)/*

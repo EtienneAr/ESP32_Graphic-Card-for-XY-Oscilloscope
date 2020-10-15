@@ -1,3 +1,9 @@
 menu "DAC_XY_Plotter"
 
+	config FONT_FILE
+		string "JSON file name"
+        default "font_thin.json"
+        help
+            Enter the name of the file that will be used to generate drawChar code. It must be located in $(component_dir)/data/.
+
 endmenu
