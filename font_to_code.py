@@ -1,28 +1,20 @@
 from sys import argv
-import os
 import json
 
 in_filepath = argv[1]
-out_filepath = argv[2]
 
-try:
-	os.remove(out_filepath)
-except:
-	pass
-finally:
-	out_file = open(out_filepath, "x")
-
-in_file = open(in_filepath)
+in_file = open(in_filepath, 'r')
 jsonParsed = json.load(in_file)
 
 x_width = jsonParsed["grid_size"][0]
 y_height = jsonParsed["grid_size"][1]
 
 def out_writeline(indent, line):
+	str_out = ""
 	for _ in range(indent): 
-		out_file.write('\t')
-	out_file.write(line)
-	out_file.write('\n')
+		str_out += '\t'
+	str_out += line
+	print(str_out)
 
 def code_c_line(x1, y1, x2, y2):
 	return "size += GO_drawLine(SAFE_PTR(start, size), x+" + str(x1) + "*height_factor, y+" + str(y1) + "*height_factor, x+" + str(x2) + "*height_factor, y+" + str(y2) + "*height_factor, 1, intensity);"
@@ -80,4 +72,3 @@ out_writeline(1, "return size;")
 out_writeline(0, "}")
 
 in_file.close()
-out_file.close()
