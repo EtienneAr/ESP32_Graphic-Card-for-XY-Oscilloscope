@@ -5,9 +5,6 @@ import json
 in_filepath = argv[1]
 out_filepath = argv[2]
 
-x_width = int(argv[3])
-y_height = int(argv[4])
-
 try:
 	os.remove(out_filepath)
 except:
@@ -17,6 +14,9 @@ finally:
 
 in_file = open(in_filepath)
 jsonParsed = json.load(in_file)
+
+x_width = jsonParsed["grid_size"][0]
+y_height = jsonParsed["grid_size"][1]
 
 def out_writeline(indent, line):
 	for _ in range(indent): 
@@ -39,13 +39,15 @@ out_writeline(1,"size_t size = 0;")
 out_writeline(1,"float height_factor = height / 7.;")
 out_writeline(1,"switch(c) {")
 
-for char in jsonParsed:
+jsonCharDict = jsonParsed["char"]
+
+for char in jsonCharDict:
 	if(char != '\'' and char != '\\'):
 		out_writeline(2, "case '" + char + "':")
 	else:
 		out_writeline(2, "case '\\" + char + "':")
 
-	char_points = jsonParsed[char]
+	char_points = jsonCharDict[char]
 
 	for i in range(1, len(char_points)):
 		if(char_points[i-1] >= 0 and char_points[i] >= 0):
