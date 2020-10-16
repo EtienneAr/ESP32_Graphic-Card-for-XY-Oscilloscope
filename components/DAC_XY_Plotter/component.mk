@@ -16,7 +16,9 @@ $(COMPONENT_LIBRARY): generate_files
 
 .PHONY: generate_files
 
-generate_files: $(FONT_CODE_C_FILEPATH)
+GENERATED_FILES := $(FONT_CODE_C_FILEPATH)
+
+generate_files: $(GENERATED_FILES)
 	@echo "Auto-Generating code"
 
 $(FONT_CODE_C_FILEPATH): $(FONT_JSON_SRC_FILEPATH)
@@ -26,3 +28,9 @@ $(FONT_CODE_C_FILEPATH): $(FONT_JSON_SRC_FILEPATH)
 
 COMPONENT_SRCDIRS += ./src ./$(GENERATED_CODE_C_RELATIVE_PATH)
 COMPONENT_EXTRA_CLEAN := $(GENERATED_CODE_C_ABSOLUTE_PATH)/*
+
+COMPONENT_OBJS := $(foreach compsrcdir,$(COMPONENT_SRCDIRS),$(patsubst %.c,%.o,$(wildcard $(COMPONENT_PATH)/$(compsrcdir)/*.c)))
+COMPONENT_OBJS += $(foreach file, $(GENERATED_FILES), $(patsubst %.c,%.o,$(file)))
+
+# Make relative by removing COMPONENT_PATH from all found object paths
+COMPONENT_OBJS := $(patsubst $(COMPONENT_PATH)/%,%,$(COMPONENT_OBJS))
