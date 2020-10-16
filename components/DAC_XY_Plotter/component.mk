@@ -1,17 +1,10 @@
+# Setup component
 COMPONENT_ADD_INCLUDEDIRS := ./include
-
 COMPONENT_PRIV_INCLUDEDIRS +=  ./priv_include
 
-
+# Setup variable for source code generation
 GENERATED_CODE_C_RELATIVE_PATH := src/generated_srcs
 GENERATED_CODE_C_ABSOLUTE_PATH := $(COMPONENT_PATH)/$(GENERATED_CODE_C_RELATIVE_PATH)
-FONT_CODE_C_FILEPATH := $(GENERATED_CODE_C_ABSOLUTE_PATH)/GraphicObject_char.c
-
-quote:="
-FONT_JSON_SRC_FILENAME := $(subst $(quote),,$(CONFIG_FONT_FILE)) 
-FONT_JSON_SRC_FILEPATH := $(COMPONENT_PATH)/data/$(FONT_JSON_SRC_FILENAME)
-
-
 
 include $(COMPONENT_PATH)/generate_files.mk
 

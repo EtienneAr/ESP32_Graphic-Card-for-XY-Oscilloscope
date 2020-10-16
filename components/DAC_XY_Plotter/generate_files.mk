@@ -1,11 +1,10 @@
-$(COMPONENT_LIBRARY): generate_files
+FONT_CODE_C_FILEPATH := $(GENERATED_CODE_C_ABSOLUTE_PATH)/GraphicObject_char.c
 
-.PHONY: generate_files
+quote:="
+FONT_JSON_SRC_FILENAME := $(subst $(quote),,$(CONFIG_FONT_FILE)) 
+FONT_JSON_SRC_FILEPATH := $(COMPONENT_PATH)/data/$(FONT_JSON_SRC_FILENAME)
 
 GENERATED_FILES := $(FONT_CODE_C_FILEPATH)
-
-generate_files: $(GENERATED_FILES)
-	@echo "Auto-Generating code"
 
 $(FONT_CODE_C_FILEPATH): $(FONT_JSON_SRC_FILEPATH)
 	@echo "Generating code for font from $<"
